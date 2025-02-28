@@ -1,6 +1,7 @@
 import { Logo } from "../icons/Logo";
 import { TwitterIcon } from "../icons/TwitterIcon";
 import { YoutubeIcon } from "../icons/YoutubeIcon";
+import { Logout } from "./Logout";
 import { SidebarItem } from "./SidebarItem";
 
 
@@ -18,6 +19,10 @@ export function Sidebar() {
             <SidebarItem text="Twitter" icon={<TwitterIcon/>}/>
             <SidebarItem text="YouTube" icon={<YoutubeIcon/>}/>
 
+        </div>
+
+        <div className="fixed bottom-0">
+            <Logout/>
         </div>
     </div>
 }

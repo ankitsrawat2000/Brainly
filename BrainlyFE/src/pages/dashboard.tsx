@@ -8,14 +8,37 @@ import { Sidebar } from "../components/Sidebar"
 import { useContent } from "../hooks/useContent"
 import { BACKEND_URL } from "../config"
 import axios from "axios"
+import { useNavigate } from "react-router-dom"
 
 export function Dashboard() {
   const [modalOpen, setModalOpen] = useState(false);
   const {contents, refresh} = useContent();
+  const navigate = useNavigate();
+
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/"); // Redirect to login if token is missing
+    }
+  }, []);
+
 
   useEffect(() => {
     refresh();
-  }, [modalOpen])
+  }, [modalOpen]);
+
+  const handleDelete = async (contentId : string) => {
+    try {
+      await axios.delete(`${BACKEND_URL}/api/v1/content`, {
+        headers: { "Authorization": localStorage.getItem("token") },
+        data: { contentId } // Axios requires data for DELETE requests
+      });
+      refresh(); // Refresh content list after deletion
+    } catch (error) {
+      console.error("Error deleting content:", error);
+    }
+  };
 
   return <div>
     <Sidebar />
@@ -41,10 +64,13 @@ export function Dashboard() {
       </div>
 
       <div className="flex gap-4 flex-wrap">
-        {contents.map(({type, link, title}) => <Card 
+        {contents.map(({type, link, title, _id}) => <Card 
+            key={_id}
             type={type}
             link={link}
             title={title}
+            contentId={_id}
+            onDelete={handleDelete}
         />)}
       </div>
     </div>
