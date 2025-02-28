@@ -6,7 +6,7 @@ import { PlusIcon } from "../icons/PlusIcon"
 import { ShareIcon } from "../icons/ShareIcon"
 import { Sidebar } from "../components/Sidebar"
 import { useContent } from "../hooks/useContent"
-import { BACKEND_URL } from "../config"
+import { BACKEND_URL, FRONTEND_URL } from "../config"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
 
@@ -46,7 +46,7 @@ export function Dashboard() {
       <CreateContentModal open={modalOpen} onClose={() => {
         setModalOpen(false);
       }} />
-      <div className="flex justify-end gap-4">
+      <div className="flex justify-end gap-4 mb-4">
         <Button onClick={() => {
           setModalOpen(true)
         }} variant="primary" text="Add content" startIcon={<PlusIcon />}></Button>
@@ -58,7 +58,7 @@ export function Dashboard() {
                     "Authorization": localStorage.getItem("token")
                 }
             });
-            const shareUrl = `http://localhost:5173/share/${response.data.hash}`;
+            const shareUrl = `${FRONTEND_URL}/share/${response.data.hash}`;
             alert(shareUrl);
         }} variant="secondary" text="Share brain" startIcon={<ShareIcon />}></Button>
       </div>

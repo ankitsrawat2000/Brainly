@@ -1,12 +1,23 @@
+import { useEffect } from "react";
 import { DeleteIcon } from "../icons/DeleteIcon";
 import { ShareIcon } from "../icons/ShareIcon";
+
+declare global {
+    interface Window {
+      twttr?: {
+        widgets: {
+          load: () => void;
+        };
+      };
+    }
+  }
 
 interface CardProps{
     title: string;
     link : string; 
     type : "twitter" | "youtube";
     contentId : string;
-    onDelete : (id: string) => void;
+    onDelete ?: (id: string) => void;
 }
 
 export function Card({title, link, type, contentId, onDelete} : CardProps){
@@ -16,7 +27,11 @@ export function Card({title, link, type, contentId, onDelete} : CardProps){
         return videoIdMatch ? `https://www.youtube.com/embed/${videoIdMatch[1]}` : "";
     };
     
-    
+    useEffect(() => {
+        if (type === "twitter" && window.twttr) {
+          window.twttr.widgets.load(); // Trigger Twitter embed processing
+        }
+      }, [type, link]);
 
     return <div>
             <div className="p-4 bg-white rounded-md border-gray-200 max-w-72
@@ -34,7 +49,7 @@ export function Card({title, link, type, contentId, onDelete} : CardProps){
                                 <ShareIcon/>
                             </a>
                         </div>
-                        <div className="text-gray-500 curson-pointer hover:text-red-500" onClick={() => onDelete(contentId)}>
+                        <div className="text-gray-500 curson-pointer hover:text-red-500" onClick={() => onDelete && onDelete(contentId)}>
                             <DeleteIcon/>
                         </div>
                     </div>

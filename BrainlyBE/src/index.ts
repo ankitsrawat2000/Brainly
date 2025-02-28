@@ -138,7 +138,6 @@ app.delete("/api/v1/content", userMiddleware, async (req,res)=>{
 app.post("/api/v1/brain/share",userMiddleware,async (req,res)=>{
     const share = req.body.share;
     if(share){
-       
         const existingLink = await LinkModel.findOne({
             userId: req.userId
         })      
@@ -207,5 +206,5 @@ app.get("/api/v1/brain/:shareLink",async (req,res)=>{
     })
 });
 
-const PORT = process.env.PORT || 3000;  // Ensure this is set
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
