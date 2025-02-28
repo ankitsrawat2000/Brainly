@@ -207,4 +207,5 @@ app.get("/api/v1/brain/:shareLink",async (req,res)=>{
     })
 });
 
-app.listen(3000);
+const PORT = process.env.PORT || 3000;  // Ensure this is set
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
