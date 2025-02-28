@@ -1,5 +1,4 @@
 import { useRef, useState } from "react";
-
 import { Button } from "./Button";
 import { Input } from "./Input";
 import { BACKEND_URL } from "../config";
@@ -12,7 +11,7 @@ enum ContentType {
 }
 
 // controlled component
-export function CreateContentModal({open, onClose}) {
+export function CreateContentModal({open, onClose} : {open : boolean; onClose: ()=> void}) {
     const titleRef = useRef<HTMLInputElement>();
     const linkRef = useRef<HTMLInputElement>();
     const [type, setType] = useState(ContentType.Youtube);

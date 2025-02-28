@@ -4,7 +4,7 @@ interface ButtonProps{//To assign a type to the ButtonProps object, you can use 
 
     variant: "primary" | "secondary",
     text: string,
-    startIcon: ReactElement,
+    startIcon?: ReactElement,
     onClick?: () => void,
     fullWidth?: boolean,
     loading?: boolean
