@@ -2,7 +2,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Logo } from "../icons/Logo";
 import { TwitterIcon } from "../icons/TwitterIcon";
 import { YoutubeIcon } from "../icons/YoutubeIcon";
-import { Logout } from "./Logout";
 import { SidebarItem } from "./SidebarItem";
 import { Button } from "./Button"; // Import your Button component
 
@@ -33,9 +32,9 @@ export function Sidebar() {
                         <Button text="Sign In" variant="primary" onClick={() => navigate("/signin")} />
                         <Button text="Sign Up" variant="secondary" onClick={() => navigate("/signup")} />
                     </div>
-                ) : (
-                    <Logout />
-                )}
+                ) : ( <div className="flex gap-2 p-4">
+                        <Button onClick={()=>{localStorage.clear(); window.location.href = '/'}} variant="primary" text="Logout"  loading={false}/>
+                    </div>)}
             </div>
         </div>
     );
