@@ -5,7 +5,7 @@
 // export const FRONTEND_URL = typeof LOCALFE_SERVER === 'undefined' ? process.env.NEXT_PUBLIC_FRONTEND_URL : LOCALFE_SERVER;
 
 
-export const BACKEND_URL = import.meta.env.NEXT_PUBLIC_BACKEND_URL;
+export const BACKEND_URL = "https://brainlybe.vercel.app";
 export const FRONTEND_URL = import.meta.env.NEXT_PUBLIC_FRONTEND_URL;
 
 console.log(BACKEND_URL);
