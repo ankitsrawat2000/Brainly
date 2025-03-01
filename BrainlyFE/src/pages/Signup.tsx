@@ -35,8 +35,8 @@ export function Signup(){
         <div className="h-screen w-screen bg-gray-200 flex
         justify-center items-center">
             <div className="bg-white rounded-xl border min-w-48 p-8">
-                <Input reference={usernameRef} placeholder="Username"/>
-                <Input reference={passwordRef} placeholder="Password"/>
+                <Input reference={usernameRef} placeholder="Username" type="text"/>
+                <Input reference={passwordRef} placeholder="Password" type="password"/>
                 <div className="flex justify-center pt-4">
                     <Button onClick={signup} variant="primary" text="Signup" fullWidth={true} loading={false}/>
                 </div>
