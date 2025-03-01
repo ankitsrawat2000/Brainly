@@ -14,6 +14,12 @@ app.use(express.json());
 
 app.use(cors());
 
+app.use(cors({
+    origin: ["https://brainly-fe-pink.vercel.app/"],
+    methods: ["POST", "GET"],
+    credentials: true
+}))
+
 app.post("/api/v1/signup", async (req,res) =>{
 
     const parsedData = CreateUserSchema.safeParse(req.body);
@@ -47,7 +53,6 @@ app.post("/api/v1/signup", async (req,res) =>{
 });
 
 app.post("/api/v1/signin",async (req,res) =>{
-    console.log("Signin API hit", req.body);
 
     const parsedData = SigninSchema.safeParse(req.body);
     if(!parsedData.success){
