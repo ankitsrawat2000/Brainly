@@ -7,11 +7,12 @@ import { Landing } from "./pages/Landing";
 
 import { SharePage } from "./pages/SharePage";
 import { Dashboard } from "./pages/Dashboard";
+import axios from "axios";
 
 
 
 function App(){
-
+  axios.defaults.withCredentials = true;
   return <BrowserRouter>
     <Routes>
       <Route path="/" element={<Landing/>}/>
