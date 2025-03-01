@@ -12,7 +12,7 @@ export function Landing(){
         <Navbar/>
         <div className="h-screen w-screen bg-gray-200 flex flex-col justify-center items-center">
             <div className="flex flex-col items-center justify-center pt-8">
-                <h1 className="md:text-6xl text-4xl font-extrabold text-purple-600  tracking-tighter">
+                <h1 className="md:text-6xl text-4xl font-extrabold text-purple-600  tracking-tighter text-center">
                 Store Your Tweets & Videos in One Place
                 </h1>
                 <p className="md:text-xl text-lg text-purple-600">
