@@ -20,7 +20,11 @@ export function Signup(){
            
                 username,
                 password
-        },{withCredentials: true})
+        },{withCredentials: true,
+            headers: {
+                "Content-Type": "application/json",
+              },
+        })
         navigate("/signin");
 
         alert("user sign up")
