@@ -3,7 +3,9 @@
 
 // const LOCALFE_SERVER = "http://localhost:5173";
 // export const FRONTEND_URL = typeof LOCALFE_SERVER === 'undefined' ? process.env.NEXT_PUBLIC_FRONTEND_URL : LOCALFE_SERVER;
-require('dotenv').config();
+import dotenv from 'dotenv';
+dotenv.config();
+
 
 
 console.log(process.env.NEXT_PUBLIC_BACKEND_URL);
