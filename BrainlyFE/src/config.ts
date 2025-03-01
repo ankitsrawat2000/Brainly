@@ -6,7 +6,7 @@
 
 
 export const BACKEND_URL = "https://brainlybe.vercel.app";
-export const FRONTEND_URL = import.meta.env.NEXT_PUBLIC_FRONTEND_URL;
+export const FRONTEND_URL = "https://brainlyfe.vercel.app";
 
 console.log(BACKEND_URL);
 
