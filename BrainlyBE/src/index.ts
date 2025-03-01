@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use(cors({
-    origin: ["https://brainly-fe-pink.vercel.app"],
+    origin: ["https://brainlyfe.vercel.app"],
     methods: ["POST", "GET"],
     credentials: true
 }))
