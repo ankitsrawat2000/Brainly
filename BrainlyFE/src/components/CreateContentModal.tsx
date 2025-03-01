@@ -12,8 +12,8 @@ enum ContentType {
 
 // controlled component
 export function CreateContentModal({open, onClose} : {open : boolean; onClose: ()=> void}) {
-    const titleRef = useRef<HTMLInputElement>();
-    const linkRef = useRef<HTMLInputElement>();
+    const titleRef = useRef<HTMLInputElement>(null);
+    const linkRef = useRef<HTMLInputElement>(null);
     const [type, setType] = useState(ContentType.Youtube);
 
     async function addContent() {
@@ -48,8 +48,8 @@ export function CreateContentModal({open, onClose} : {open : boolean; onClose: (
                             </div>
                         </div>
                         <div>
-                            <Input reference={titleRef} placeholder={"Title"} />
-                            <Input reference={linkRef} placeholder={"Link"} />
+                            <Input ref={titleRef} placeholder={"Title"} type="text" />
+                            <Input ref={linkRef} placeholder={"Link"} type="text"/>
                         </div>
                         <div>
                             <h1>Type</h1>
