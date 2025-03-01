@@ -47,6 +47,7 @@ app.post("/api/v1/signup", async (req,res) =>{
 });
 
 app.post("/api/v1/signin",async (req,res) =>{
+    console.log("Signin API hit", req.body);
 
     const parsedData = SigninSchema.safeParse(req.body);
     if(!parsedData.success){
