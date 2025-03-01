@@ -23,7 +23,12 @@ const bcrypt_1 = __importDefault(require("bcrypt"));
 const types_1 = require("./types");
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
-app.use((0, cors_1.default)());
+app.use((0, cors_1.default)({
+    origin: "https://brainlyfe.vercel.app",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true
+}));
 app.post("/api/v1/signup", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b;
     const parsedData = types_1.CreateUserSchema.safeParse(req.body);
@@ -53,7 +58,6 @@ app.post("/api/v1/signup", (req, res) => __awaiter(void 0, void 0, void 0, funct
 }));
 app.post("/api/v1/signin", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b;
-    console.log("Signin API hit", req.body);
     const parsedData = types_1.SigninSchema.safeParse(req.body);
     if (!parsedData.success) {
         res.json({

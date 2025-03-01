@@ -13,22 +13,33 @@ export function Signin() {
     const navigate = useNavigate();
 
     async function signin() {
-        const username = usernameRef.current?.value;
-        const password = passwordRef.current?.value;
-
-        const response = await axios.post(`${BACKEND_URL}/api/v1/signin`, {
-            username,
-            password
-        },{withCredentials: true,
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
-
-        const jwt = response.data.token;
-        localStorage.setItem("token", jwt);
-        navigate("/dashboard");
+        try {
+            const username = usernameRef.current?.value;
+            const password = passwordRef.current?.value;
+    
+            const response = await axios.post(`${BACKEND_URL}/api/v1/signin`, {
+                username,
+                password
+            }, {
+                withCredentials: true,
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+    
+            console.log(response.data);
+    
+            if (response.data.token) {
+                localStorage.setItem("token", response.data.token);
+                navigate("/dashboard");
+            } else {
+                console.error("Token not found in response");
+            }
+        } catch (error) {
+            console.error("Signin error:", error);
+        }
     }
+    
 
     return (
         <div>

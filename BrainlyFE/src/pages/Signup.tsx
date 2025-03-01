@@ -12,24 +12,29 @@ export function Signup(){
     const passwordRef = useRef<HTMLInputElement>(null);
     const navigate = useNavigate();
 
-    async function signup(){
-
-        const username = usernameRef.current?.value;
-        const password = passwordRef.current?.value;
-        await axios.post(BACKEND_URL + "/api/v1/signup", {
-           
+    async function signup() {
+        try {
+            const username = usernameRef.current?.value;
+            const password = passwordRef.current?.value;
+    
+            const response = await axios.post(`${BACKEND_URL}/api/v1/signup`, {
                 username,
                 password
-        },{withCredentials: true,
-            headers: {
-                "Content-Type": "application/json",
-              },
-        })
-        navigate("/signin");
-
-        alert("user sign up")
-
-
+            }, {
+                withCredentials: true,
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+    
+            console.log(response.data);
+    
+            alert("User signed up successfully!");
+            navigate("/signin");
+        } catch (error) {
+            console.error("Signup error:", error);
+            alert("Signup failed. Please try again.");
+        }
     }
 
 
