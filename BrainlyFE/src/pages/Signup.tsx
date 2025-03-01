@@ -20,7 +20,7 @@ export function Signup(){
            
                 username,
                 password
-        })
+        },{withCredentials: true})
         navigate("/signin");
 
         alert("user sign up")
