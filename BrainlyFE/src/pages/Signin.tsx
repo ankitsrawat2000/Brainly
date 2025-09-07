@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Button } from "../components/Button";
 import { Input } from "../components/Input";
 import { BACKEND_URL } from "../config";
@@ -9,10 +9,15 @@ import { Navbar } from "../components/Navbar";
 export function Signin() {
     const usernameRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
+    const [error, setError] = useState<string>("");
+    const [loading, setLoading] = useState<boolean>(false);
 
     const navigate = useNavigate();
 
     async function signin() {
+        setError("");
+        setLoading(true);
+        
         try {
             const username = usernameRef.current?.value;
             const password = passwordRef.current?.value;
@@ -34,9 +39,20 @@ export function Signin() {
                 navigate("/dashboard");
             } else {
                 console.error("Token not found in response");
+                setError("Signin failed. Please try again.");
             }
-        } catch (error) {
+        } catch (error: any) {
             console.error("Signin error:", error);
+            
+            if (error.response?.data?.message) {
+                setError(error.response.data.message);
+            } else if (error.response?.status === 403) {
+                setError("Invalid credentials");
+            } else {
+                setError("Signin failed. Please try again.");
+            }
+        } finally {
+            setLoading(false);
         }
     }
     
@@ -48,8 +64,15 @@ export function Signin() {
                 <div className="bg-white rounded-xl border min-w-48 p-8">
                     <Input ref={usernameRef} placeholder="Username" type="text"/>
                     <Input ref={passwordRef} placeholder="Password" type="password"/>
+                    
+                    {error && (
+                        <div className="mt-3 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+                            {error}
+                        </div>
+                    )}
+                    
                     <div className="flex justify-center pt-4">
-                        <Button onClick={signin} variant="primary" text="Signin" fullWidth={true} loading={false} />
+                        <Button onClick={signin} variant="primary" text="Signin" fullWidth={true} loading={loading} />
                     </div>
                 </div>
             </div>
