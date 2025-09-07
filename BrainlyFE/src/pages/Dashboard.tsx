@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom"
 
 export function Dashboard() {
   const [modalOpen, setModalOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const {contents, refresh} = useContent();
   const navigate = useNavigate();
 
@@ -19,7 +20,7 @@ export function Dashboard() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
-      navigate("/"); // Redirect to login if token is missing
+      navigate("/");
     }
   }, []);
 
@@ -41,8 +42,25 @@ export function Dashboard() {
   };
 
   return <div>
-    <Sidebar />
-    <div className="p-4 ml-72 min-h-screen bg-gray-100 border-2">
+    <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+    
+    <button
+      onClick={() => setSidebarOpen(true)}
+      className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-white rounded-md shadow-md border"
+    >
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+
+    {sidebarOpen && (
+      <div 
+        className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-40"
+        onClick={() => setSidebarOpen(false)}
+      />
+    )}
+
+    <div className="p-4 lg:ml-72 min-h-screen bg-gray-100 border-2">
       <CreateContentModal open={modalOpen} onClose={() => {
         setModalOpen(false);
       }} />
